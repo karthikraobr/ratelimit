@@ -13,7 +13,7 @@ func NewRateLimiterMiddleware(limit time.Duration, burst int, next http.HandlerF
 			Email string `json:"email"`
 		}
 		if err := json.NewDecoder(r.Body).Decode(&email); err != nil {
-			http.Error(w, http.StatusText(http.StatusInternalServerError), http.StatusInternalServerError)
+			http.Error(w, http.StatusText(http.StatusBadRequest), http.StatusBadRequest)
 			return
 		}
 		limiter := rateLimitter.Get(email.Email)
